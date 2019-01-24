@@ -1,9 +1,17 @@
 @extends('admin.layoutsadmin')
-
+@section('title_action')
+    <h1>
+        UserAction
+        <small>Add User</small>
+    </h1>
+@endsection
 @section('content')
     @if (session('notify'))
         .<div class="alert alert-success text-center" role="alert">
             <strong style="font-size: 15px;">{{session('notify')}}</strong>
+            {{--  <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>  --}}
         </div>
     @endif
     <div class="box box-default">
@@ -12,8 +20,8 @@
             <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
             <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>
         </div>
-    </div>
         <!-- /.box-header -->
         <div class="box-body">
         <form action="AddUser" method="POST"  enctype="multipart/form-data">
@@ -41,21 +49,21 @@
             </div>
              <div class="col-md-6">
               <div class="form-group">
-                <label>Confirm Password</label>
+                <label>Confirm Password:</label>
                     <input type="password" class="form-control" name="confPassword" id="">
               </div>
               <!-- /.form-group -->
              </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label>E-mail</label>
+                <label>E-mail:</label>
                     <input type="email" class="form-control" name="email" id="">
               </div>
               <!-- /.form-group -->
             </div>
              <div class="col-md-6">
               <div class="form-group">
-                <label>Address</label>
+                <label>Address:</label>
                     <input type="text" class="form-control" name="address" id="">
               </div>
               <!-- /.form-group -->
@@ -77,6 +85,9 @@
               <div class="form-group">
                 <label>Avatar</label>
                     <input type="file" class="form-control" name="avatar" id="">
+                    @if (session('notify_errorUpload'))
+                        <p class="text-danger"><strong>{{session('notify_errorUpload')}}</strong></p>
+                    @endif
               </div>
               <!-- /.form-group -->
              </div>
@@ -85,15 +96,13 @@
               <div class="form-group">
                 <label>
                 Admin
-                  <input type="radio" name="checkadmin" value="1" class="minimal-red" checked>
+                  <input type="radio" name="checkadmin" value="1" class="minimal-red">
                 </label>&nbsp;
                 <label>
                 User
-                  <input type="radio" name="checkadmin" value="0"  class="minimal-red">
+                  <input type="radio" name="checkadmin" value="0"  class="minimal-red" checked>
                 </label>
-
               </div>
-            </div>
           </div>
           <!-- /.row -->
           <button type="submit" class="btn btn-primary btn-block"><strong style="font-size: 15px;">Submit Server</strong></button>

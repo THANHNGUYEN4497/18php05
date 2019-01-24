@@ -115,21 +115,21 @@
             </ul>
           </li>
           <!-- User Account Menu -->
-          <li class="dropdown user user-menu">
+           @if(Auth::guard('admin')->check())
+            <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+              <img src="{{asset('images/userAvatar/').'/'}}{{Auth::guard('admin')->user()->avatar}}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">{{Auth::guard('admin')->user()->fullname}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
-
+                <img src="{{asset('images/userAvatar/').'/'}}{{Auth::guard('admin')->user()->avatar}}" class="img-circle" alt="User Image">
                 <p>
-                  Alexander Pierce - Web Developer
+                  {{Auth::guard('admin')->user()->fullname}} - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -154,11 +154,14 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{route('admin.logout')}}" class="btn btn-default btn-flat">Logout</a>
                 </div>
               </li>
             </ul>
           </li>
+           @endif
+
+
           <!-- Control Sidebar Toggle Button -->
           <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
@@ -176,10 +179,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+          <img src="{{asset('images/userAvatar/').'/'}}{{Auth::guard('admin')->user()->avatar}}" class="img img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{Auth::guard('admin')->user()->fullname}}</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -204,14 +207,58 @@
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+          <a href="#"><i class="fa fa-user-o"></i> <span>UserAction</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
-              </span>
+            </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="{{route('AddUser')}}">Add User</a></li>
+            <li><a href="{{route('ListUser')}}">List DATA User</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-indent"></i> <span>CategoryAction</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('AddCategory')}}">Add Category</a></li>
+            <li><a href="{{route('ListCategory')}}">List DATA Category</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-black-tie"></i> <span>BrandAction</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('AddBrand')}}">Add Brand</a></li>
+            <li><a href="{{route('ListBrand')}}">List DATA Brand</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-empire"></i> <span>ProductAction</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('AddProduct')}}">Add Product</a></li>
+            <li><a href="{{route('ListProduct')}}">List DATA Product</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-play"></i> <span>SliderAction</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('AddSlider')}}">Add Slider</a></li>
+            <li><a href="{{route('ListSlider')}}">List DATA Slider</a></li>
           </ul>
         </li>
       </ul>

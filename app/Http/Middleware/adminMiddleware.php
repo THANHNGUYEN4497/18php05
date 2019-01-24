@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class adminMiddleware
@@ -15,6 +15,17 @@ class adminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (Auth::guard('admin')->check()) {
+            $infoUser = Auth::guard('admin')->user();
+            if ($infoUser->is_admin == 1) {
+                return $next($request);
+            }
+            else {
+                return redirect('admin/login')->with('notAdmin','Access Denied !!');
+            }
+        }
+        else {
+            return redirect('admin/login');
+        }
     }
 }
